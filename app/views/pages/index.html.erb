@@ -1,0 +1,21 @@
+<div class="jumbotron text-center" style="margin-top: 50px;">
+    <h1 class="display-3">Welcome to Rambutan Lunch Log</h1>
+    <p class="lead">Automatically match up teammates to have lunch together!</p>
+    
+     
+    <div class="card" style="width: 20rem; margin: 0 auto;">
+      <div class="card-body">
+        <h4 class="card-title">Today's Lunch</h4>
+        <p class="card-text">
+          <% if @lunchdate %>
+          <strong><%= @lunchdate.teammate_a.name %></strong> is treating <strong><%= @lunchdate.teammate_b.name %></strong> to lunch.
+          <% else %>
+          No lunch date scheduled today.
+          <% end %>
+          <% if Date.today.saturday? || Date.today.sunday? %>
+          <br> <i>Lunches only scheduled on weekdays.</i>
+          <% end %>
+        </p>
+      </div>
+    </div>
+</div>

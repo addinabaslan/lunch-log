@@ -1,2 +1,11 @@
 class ApplicationController < ActionController::Base
-end
+    protect_from_forgery
+    
+    def authorize
+      unless session[:user]
+        flash[:notice] = "Please log in"
+        redirect_to controller: "users", action: "login"
+      end
+    end
+  end
+  
