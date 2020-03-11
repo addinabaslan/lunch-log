@@ -1,19 +1,10 @@
 class UsersController < ApplicationController
-    # GET /users/1
-  #  # GET /users/1.xml
-  #  def show
-  #    @user = User.find(params[:id])
-  
-  #    respond_to do |format|
-  #      format.html # show.html.erb
-  #      format.xml  { render :xml => @user }
-  #    end
-  #  end
   
     # GET /users/new
     # GET /users/new.xml
     def new
       @user = User.new
+
   
       respond_to do |format|
         format.html # new.html.erb
@@ -24,7 +15,7 @@ class UsersController < ApplicationController
     # POST /users
     # POST /users.xml
     def create
-      @user = User.new(params[:user])
+      @user = User.new(user_params)
   
       respond_to do |format|
         if @user.save
@@ -44,13 +35,13 @@ class UsersController < ApplicationController
         if user
           session[:user_id] = user.id
           session[:user] = user
-  #        uri = session[:original_uri]
-  #        session[:original_uri] = nil
-  #        if uri != nil
-  #          redirect_to(uri || "/")
-  #        else
+         uri = session[:original_uri]
+         session[:original_uri] = nil
+         if uri != nil
+           redirect_to(uri || "/")
+         else
           redirect_to '/'
-  #        end
+         end
         else
           flash.now[:notice] = "Invalid username/password combination"
         end
@@ -63,5 +54,11 @@ class UsersController < ApplicationController
       flash[:notice] = "Logged out"
       redirect_to :controller => "home"
     end
+
+    private
+
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :salt, :encrypted_password)
+  end
   end
   
