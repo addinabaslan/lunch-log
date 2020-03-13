@@ -1,21 +1,23 @@
-<div class="jumbotron text-center" style="margin-top: 50px;">
-    <h1 class="display-3">Welcome to Rambutan Lunch Log</h1>
-    <p class="lead">Automatically match up teammates to have lunch together!</p>
-    
-     
-    <div class="card" style="width: 20rem; margin: 0 auto;">
-      <div class="card-body">
-        <h4 class="card-title">Todays Lunch </h4>
-        <p class="card-text">
-          <% if @lunchdate %>
-          <strong><%= @lunchdate.teammate_a.name %></strong> is treating <strong><%= @lunchdate.teammate_b.name %></strong> to lunch.
-          <% else %>
-          No lunch date scheduled today.
-          <% end %>
-          <% if Date.today.saturday? || Date.today.sunday? %>
-          <br> <i>Lunches only scheduled on weekdays.</i>
-          <% end %>
-        </p>
-      </div>
-    </div>
+<% content_for :page_title,  "The Amazing Rambutan Lunch Log" %>
+
+<div class="section">
+	<div class="container">
+		<% @posts.each do |post| %>
+			<div class="card">
+		  <div class="card-content">
+		    <div class="media">
+		      <div class="media-content">
+		        <p class="title is-4"><%= link_to post.title, post  %></p>
+		      </div>
+		    </div>
+		    <div class="content">
+		     	<%= post.content %>
+		    </div>
+		    <div class="comment-count">
+		    	<span class="tag is-rounded"><%= post.comments.count %> comments</span>
+		    </div>
+		  </div>
+		</div>
+		<% end %>
+	</div>
 </div>
