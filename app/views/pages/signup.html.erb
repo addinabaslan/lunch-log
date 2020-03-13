@@ -1,0 +1,18 @@
+<%= form_tag do %>
+  <fieldset>
+    <legend>Please Sign Up</legend>
+    <table>
+      <tr>
+        <td><label for="name">Email:</label></td>
+        <td><%= text_field_tag :email, params[:email] %></td>
+      </tr>
+      <tr>
+        <td><label for="password">Password:</label></td>
+        <td><%= password_field_tag :password, params[:password] %></td>
+      </tr>
+      <tr>
+        <td colspan="2"><%= submit_tag "Sign Up" %></td>
+      </tr>
+    </table>
+  </fieldset>
+<% end %>
